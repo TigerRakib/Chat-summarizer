@@ -45,6 +45,15 @@ def keyword_analysis(file,top_n=5):
     print(all_words)
     most_common=Counter(all_words).most_common(top_n)
     return [value for value, _ in most_common]
-    
+def generate_summary(filename):
+    user,ai,all_msgs=chat_log_parsing(filename)
+    total=len(user)+len(ai)
+    keywords=keyword_analysis(filename)
+    summary = f"""Summary for {filename}:
+- The conversation had {total} exchanges.
+- The user asked mainly about {' '.join(keywords[:2])} and its uses.
+- Most common keywords: {', '.join(keywords)}
+    """
+    return summary
 file="example.txt"
-print(keyword_analysis(file))
+print(generate_summary(file))
