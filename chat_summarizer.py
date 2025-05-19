@@ -47,7 +47,7 @@ def keyword_analysis(file,top_n=5):
         for word in words:
             if word not in stopwords:
                 all_words.append(word)
-    print(all_words)
+    #print(all_words)
     most_common=Counter(all_words).most_common(top_n)
     return [value for value, _ in most_common]
 
@@ -64,10 +64,13 @@ def tfidf_analysis(file, top_n=5):
     sorted_keywords = sorted(filtered_keywords, key=lambda x: x[1], reverse=True)
     return [val for val, _ in sorted_keywords[:top_n]]
 
-def generate_summary(filename):
+def generate_summary(filename,use_idf=True):
     user,ai,all_msgs=chat_log_parsing(filename)
     total=len(user)+len(ai)
-    keywords=keyword_analysis(filename)
+    if use_idf:
+        keywords=tfidf_analysis(filename)
+    else:
+        keywords=keyword_analysis(filename)
     summary = f"""Summary for {filename}:
 - The conversation had {total} exchanges.
 - The user asked mainly about {' '.join(keywords[:2])} and its uses.
@@ -75,4 +78,4 @@ def generate_summary(filename):
     """
     return summary
 file="example.txt"
-print(tfidf_analysis(file))
+print(generate_summary(file))
