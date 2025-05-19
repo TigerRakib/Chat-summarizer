@@ -2,6 +2,11 @@ import os
 import string
 import re 
 from collections import Counter
+from sklearn.feature_extraction.text import TfidfVectorizer
+from nltk.corpus import stopwords as nltk_stopwords
+import nltk
+
+nltk.download('stopwords')
 
 stopwords = set([
     'the', 'is', 'and', 'a', 'an', 'can', 'you', 'for', 'to', 'of', 'in', 'it', 'its', 'this', 'that', 'on', 'with'
@@ -45,6 +50,20 @@ def keyword_analysis(file,top_n=5):
     print(all_words)
     most_common=Counter(all_words).most_common(top_n)
     return [value for value, _ in most_common]
+
+def tfidf_analysis(file, top_n=5):
+    user,ai,all_msgs=chat_log_parsing(file)
+    default_stopwords = set(nltk_stopwords.words('english'))
+    custom_stopwords = default_stopwords.union({'hello', 'hi', 'thanks', 'please', 'okay', 'yes', 'no'})
+    vectorizer = TfidfVectorizer()
+    tfidf_mat = vectorizer.fit_transform(all_msgs)
+    scores = tfidf_mat.sum(axis=0).A1
+    voca = vectorizer.get_feature_names_out()
+    keywords_scores = list(zip(voca, scores))
+    filtered_keywords = [(word, score) for word, score in keywords_scores if word.lower() not in custom_stopwords]
+    sorted_keywords = sorted(filtered_keywords, key=lambda x: x[1], reverse=True)
+    return [val for val, _ in sorted_keywords[:top_n]]
+
 def generate_summary(filename):
     user,ai,all_msgs=chat_log_parsing(filename)
     total=len(user)+len(ai)
@@ -56,4 +75,4 @@ def generate_summary(filename):
     """
     return summary
 file="example.txt"
-print(generate_summary(file))
+print(tfidf_analysis(file))
