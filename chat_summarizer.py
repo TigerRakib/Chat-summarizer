@@ -34,7 +34,7 @@ def message_statistics(filename):
     count_ai_msgs=len(ai_msgs)
     return total_msgs,count_user_msgs,count_ai_msgs
 
-def keyword_analysis(file):
+def keyword_analysis(file,top_n=5):
     user,ai,all_msgs=chat_log_parsing(file)
     all_words=[]
     for msg in all_msgs:
@@ -42,7 +42,9 @@ def keyword_analysis(file):
         for word in words:
             if word not in stopwords:
                 all_words.append(word)
-        print(words)
+    print(all_words)
+    most_common=Counter(all_words).most_common(top_n)
+    return [value for value, _ in most_common]
     
 file="example.txt"
-keyword_analysis(file)
+print(keyword_analysis(file))
