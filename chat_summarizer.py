@@ -27,6 +27,12 @@ def clean_msgs(msg):
     msg=msg.lower()
     msg = re.sub(r"[^\w\s]", '', msg)
     return msg
+def message_statistics(filename):
+    user_msgs,ai_msgs,all_msgs=chat_log_parsing(filename)
+    total_msgs=len(all_msgs)
+    count_user_msgs=len(user_msgs)
+    count_ai_msgs=len(ai_msgs)
+    return total_msgs,count_user_msgs,count_ai_msgs
 
 file="example.txt"
 chat_log_parsing(file)
