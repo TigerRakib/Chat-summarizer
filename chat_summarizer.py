@@ -21,6 +21,12 @@ def chat_log_parsing(file_path):
             msg = line[len("AI:"):].strip()
             ai_msgs.append(msg)
             all_msgs.append(msg)
-    print(user_msgs,ai_msgs,all_msgs)
+    return user_msgs,ai_msgs,all_msgs
+
+def clean_msgs(msg):
+    msg=msg.lower()
+    msg = re.sub(r"[^\w\s]", '', msg)
+    return msg
+
 file="example.txt"
 chat_log_parsing(file)
