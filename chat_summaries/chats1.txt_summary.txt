@@ -1,0 +1,5 @@
+chat_logs\chats1.txt:
+- The conversation had 4 exchanges.
+- The user asked mainly about python use and its uses.
+- Most common keywords: python, use, hi, tell, me
+    

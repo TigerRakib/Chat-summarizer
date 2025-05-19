@@ -76,12 +76,14 @@ def generate_summary(filename,user,ai,all_msgs,use_idf=True):
     return summary
 
 def summarize_folder(input_path,output_path,use_tfidf=False):
-
+    os.makedirs(output_folder,exist_ok=True)
     for filename in os.listdir(input_path):
         if filename.endswith(".txt"):
             filepath = os.path.join(input_path, filename)
             user_msgs, ai_msgs, all_msgs = chat_log_parsing(filepath)
             summary = generate_summary(filepath, user_msgs, ai_msgs, all_msgs, use_tfidf)
+            with open(os.path.join(output_folder, f"{filename}_summary.txt"), 'w') as output:
+                output.write(summary)
             print(f"Summary: {summary}")
 
 

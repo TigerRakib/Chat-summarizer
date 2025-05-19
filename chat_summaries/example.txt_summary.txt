@@ -1,0 +1,5 @@
+chat_logs\example.txt:
+- The conversation had 4 exchanges.
+- The user asked mainly about machine learning and its uses.
+- Most common keywords: machine, learning, hello, hi, how
+    
