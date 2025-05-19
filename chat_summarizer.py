@@ -39,8 +39,7 @@ def message_statistics(filename):
     count_ai_msgs=len(ai_msgs)
     return total_msgs,count_user_msgs,count_ai_msgs
 
-def keyword_analysis(file,top_n=5):
-    user,ai,all_msgs=chat_log_parsing(file)
+def keyword_analysis(all_msgs,top_n=5):
     all_words=[]
     for msg in all_msgs:
         words=clean_msgs(msg).split()
@@ -51,8 +50,7 @@ def keyword_analysis(file,top_n=5):
     most_common=Counter(all_words).most_common(top_n)
     return [value for value, _ in most_common]
 
-def tfidf_analysis(file, top_n=5):
-    user,ai,all_msgs=chat_log_parsing(file)
+def tfidf_analysis(all_msgs, top_n=5):
     default_stopwords = set(nltk_stopwords.words('english'))
     custom_stopwords = default_stopwords.union({'hello', 'hi', 'thanks', 'please', 'okay', 'yes', 'no'})
     vectorizer = TfidfVectorizer()
@@ -64,18 +62,30 @@ def tfidf_analysis(file, top_n=5):
     sorted_keywords = sorted(filtered_keywords, key=lambda x: x[1], reverse=True)
     return [val for val, _ in sorted_keywords[:top_n]]
 
-def generate_summary(filename,use_idf=True):
-    user,ai,all_msgs=chat_log_parsing(filename)
+def generate_summary(filename,user,ai,all_msgs,use_idf=True):
     total=len(user)+len(ai)
     if use_idf:
-        keywords=tfidf_analysis(filename)
+        keywords=tfidf_analysis(all_msgs)
     else:
-        keywords=keyword_analysis(filename)
-    summary = f"""Summary for {filename}:
+        keywords=keyword_analysis(all_msgs)
+    summary = f"""{filename}:
 - The conversation had {total} exchanges.
 - The user asked mainly about {' '.join(keywords[:2])} and its uses.
 - Most common keywords: {', '.join(keywords)}
     """
     return summary
-file="example.txt"
-print(generate_summary(file))
+
+def summarize_folder(input_path,output_path,use_tfidf=False):
+
+    for filename in os.listdir(input_path):
+        if filename.endswith(".txt"):
+            filepath = os.path.join(input_path, filename)
+            user_msgs, ai_msgs, all_msgs = chat_log_parsing(filepath)
+            summary = generate_summary(filepath, user_msgs, ai_msgs, all_msgs, use_tfidf)
+            print(f"Summary: {summary}")
+
+
+if __name__ == "__main__":
+    chat_log_folder="chat_logs"
+    output_folder="chat_summaries"
+    summarize_folder(chat_log_folder, output_folder, use_tfidf=False)
