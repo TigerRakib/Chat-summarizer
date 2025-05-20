@@ -72,6 +72,7 @@ Summary: chat_logs\example.txt:
 - The user asked mainly about machine learning and its uses.
 - Most common keywords: machine, learning, hello, hi, how
 ```
+![Chat Summarizer Screenshot]([images/screenshot.png](https://github.com/TigerRakib/Chat-summarizer/blob/main/Screenshot%202025-05-20%20150504.png?raw=true))
 
 ---
 
