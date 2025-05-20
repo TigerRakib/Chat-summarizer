@@ -96,12 +96,7 @@ Chat-summarizer/
 
 ---
 
-## 📃 License
-
-This project is licensed under the MIT License. Feel free to use and modify it.
-
----
 
 ## ✨ Author
 
-Developed by [TigerRakib](https://github.com/TigerRakib) — contributions welcome!
+Developed by [Rakib](https://github.com/TigerRakib) — contributions welcome!
