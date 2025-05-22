@@ -67,10 +67,7 @@ summarize_folder("chat_logs", "summaries", use_tfidf=True)
 ## 🧪 Sample Summary Output
 
 ```
-Summary: chat_logs\example.txt:
-- The conversation had 4 exchanges.
-- The user asked mainly about machine learning and its uses.
-- Most common keywords: machine, learning, hello, hi, how
+Summaries without using TF-IDF: 
 ```
 ![Chat Summarizer Screenshot](https://github.com/TigerRakib/Chat-summarizer/blob/1e953941d3b8e8e449900327d69f78bc40ed3e01/Screenshot%202025-05-20%20150448.png)
 ![Chat Summarizer Screenshot](https://github.com/TigerRakib/Chat-summarizer/blob/2044a2a7ec9db98d2af6f852ab147793d7d7318a/Screenshot%202025-05-20%20150504.png)
