@@ -75,7 +75,7 @@ Summaries without using TF-IDF:
 Summaries using TF-IDF: 
 ```
 ![Chat Summarizer Screenshot](https://github.com/TigerRakib/Chat-summarizer/blob/9c97ba279c8106bc180f9b98fa3d097d80998949/Screenshot%202025-05-23%20004651.png)
-![Chat Summarizer Screenshot](https://github.com/TigerRakib/Chat-summarizer/blob/2044a2a7ec9db98d2af6f852ab147793d7d7318a/Screenshot%202025-05-20%20150504.png)
+![Chat Summarizer Screenshot](https://github.com/TigerRakib/Chat-summarizer/blob/6e6bf87504c256a116e2d9a5d067cf88b54964a7/Screenshot%202025-05-23%20004702.png)
 ---
 
 ## 📁 Project Structure
